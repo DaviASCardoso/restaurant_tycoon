@@ -1,0 +1,279 @@
+{
+  "cardapio": [
+    {
+      "id": 1,
+      "nome": "X Burguer Clássico",
+      "preco": 15.5,
+      "ingredientes": [
+        "Pão",
+        "Hambúrguer",
+        "Queijo"
+      ],
+      "tempo_preparo": 3,
+      "desbloqueado": true,
+      "categoria": "sanduiche"
+    },
+    {
+      "id": 2,
+      "nome": "Água Mineral",
+      "preco": 4.0,
+      "ingredientes": [
+        "Água"
+      ],
+      "tempo_preparo": 1,
+      "desbloqueado": false,
+      "categoria": "bebida"
+    },
+    {
+      "id": 3,
+      "nome": "Casquinha de Baunilha",
+      "preco": 5.0,
+      "ingredientes": [
+        "Casquinha",
+        "Sorvete de Baunilha"
+      ],
+      "tempo_preparo": 2,
+      "desbloqueado": false,
+      "categoria": "sobremesa"
+    },
+    {
+      "id": 4,
+      "nome": "X-Salada Tradicional",
+      "preco": 18.5,
+      "ingredientes": [
+        "Pão",
+        "Hambúrguer",
+        "Queijo",
+        "Alface",
+        "Tomate",
+        "Maionese"
+      ],
+      "tempo_preparo": 4,
+      "desbloqueado": false,
+      "categoria": "sanduiche"
+    },
+    {
+      "id": 5,
+      "nome": "Refrigerante de Lata",
+      "preco": 6.0,
+      "ingredientes": [
+        "Refrigerante"
+      ],
+      "tempo_preparo": 1,
+      "desbloqueado": false,
+      "categoria": "bebida"
+    },
+    {
+      "id": 6,
+      "nome": "Sundae de Chocolate",
+      "preco": 9.5,
+      "ingredientes": [
+        "Sorvete de Baunilha",
+        "Calda de Chocolate",
+        "Amendoim Picado"
+      ],
+      "tempo_preparo": 3,
+      "desbloqueado": false,
+      "categoria": "sobremesa"
+    },
+    {
+      "id": 7,
+      "nome": "Cheddar Bacon",
+      "preco": 23.9,
+      "ingredientes": [
+        "Pão",
+        "Hambúrguer",
+        "Queijo Cheddar",
+        "Bacon Crise"
+      ],
+      "tempo_preparo": 5,
+      "desbloqueado": false,
+      "categoria": "sanduiche"
+    },
+    {
+      "id": 8,
+      "nome": "Suco de Laranja Natural",
+      "preco": 8.0,
+      "ingredientes": [
+        "Laranja",
+        "Gelo"
+      ],
+      "tempo_preparo": 3,
+      "desbloqueado": false,
+      "categoria": "bebida"
+    },
+    {
+      "id": 9,
+      "nome": "Milkshake de Morango",
+      "preco": 12.0,
+      "ingredientes": [
+        "Sorvete de Creme",
+        "Leite",
+        "Calda de Morango"
+      ],
+      "tempo_preparo": 4,
+      "desbloqueado": false,
+      "categoria": "sobremesa"
+    },
+    {
+      "id": 10,
+      "nome": "X-Egg Bacon Supreme",
+      "preco": 26.5,
+      "ingredientes": [
+        "Pão",
+        "Hambúrguer",
+        "Queijo",
+        "Ovo",
+        "Bacon",
+        "Maionese Verde"
+      ],
+      "tempo_preparo": 6,
+      "desbloqueado": false,
+      "categoria": "sanduiche"
+    },
+    {
+      "id": 11,
+      "nome": "Chá Gelado de Limão",
+      "preco": 8.5,
+      "ingredientes": [
+        "Chá Preto",
+        "Suco de Limão",
+        "Gelo",
+        "Hortelã"
+      ],
+      "tempo_preparo": 3,
+      "desbloqueado": false,
+      "categoria": "bebida"
+    },
+    {
+      "id": 12,
+      "nome": "Brownie com Sorvete",
+      "preco": 15.0,
+      "ingredientes": [
+        "Brownie de Chocolate",
+        "Sorvete de Creme",
+        "Calda Quente"
+      ],
+      "tempo_preparo": 4,
+      "desbloqueado": false,
+      "categoria": "sobremesa"
+    },
+    {
+      "id": 13,
+      "nome": "Chicken Crispy Burger",
+      "preco": 25.9,
+      "ingredientes": [
+        "Pão de Brioche",
+        "Frango Empanado",
+        "Queijo Prato",
+        "Alface",
+        "Molho Especial"
+      ],
+      "tempo_preparo": 5,
+      "desbloqueado": false,
+      "categoria": "sanduiche"
+    },
+    {
+      "id": 14,
+      "nome": "Soda Italiana Maçã Verde",
+      "preco": 11.0,
+      "ingredientes": [
+        "Água com Gás",
+        "Xarope de Maçã Verde",
+        "Gelo",
+        "Fatia de Limão"
+      ],
+      "tempo_preparo": 3,
+      "desbloqueado": false,
+      "categoria": "bebida"
+    },
+    {
+      "id": 15,
+      "nome": "Petit Gâteau",
+      "preco": 18.5,
+      "ingredientes": [
+        "Bolinho de Chocolate",
+        "Sorvete de Creme",
+        "Cobertura",
+        "Morango"
+      ],
+      "tempo_preparo": 5,
+      "desbloqueado": false,
+      "categoria": "sobremesa"
+    },
+    {
+      "id": 16,
+      "nome": "Duplo Cheddar Caramelizado",
+      "preco": 32.0,
+      "ingredientes": [
+        "Pão Australiano",
+        "2x Hambúrguer",
+        "2x Queijo Cheddar",
+        "Cebola Caramelizada"
+      ],
+      "tempo_preparo": 7,
+      "desbloqueado": false,
+      "categoria": "sanduiche"
+    },
+    {
+      "id": 17,
+      "nome": "Smoothie de Frutas Vermelhas",
+      "preco": 14.0,
+      "ingredientes": [
+        "Morango",
+        "Amora",
+        "Mirtilo",
+        "Iogurte Natural",
+        "Gelo"
+      ],
+      "tempo_preparo": 4,
+      "desbloqueado": false,
+      "categoria": "bebida"
+    },
+    {
+      "id": 18,
+      "nome": "Taça Suprema de Nutella",
+      "preco": 22.0,
+      "ingredientes": [
+        "Sorvete de Creme",
+        "Nutella",
+        "Chantilly",
+        "Pedaços de Brownie"
+      ],
+      "tempo_preparo": 6,
+      "desbloqueado": false,
+      "categoria": "sobremesa"
+    },
+    {
+      "id": 19,
+      "nome": "Monster BBQ Bacon",
+      "preco": 39.9,
+      "ingredientes": [
+        "Pão de Brioche",
+        "3x Hambúrguer",
+        "Queijo Cheddar",
+        "Muito Bacon",
+        "Cebola Crispy",
+        "Molho Barbecue"
+      ],
+      "tempo_preparo": 8,
+      "desbloqueado": false,
+      "categoria": "sanduiche"
+    },
+    {
+      "id": 20,
+      "nome": "Milkshake Ovomaltine Crocante",
+      "preco": 16.5,
+      "ingredientes": [
+        "Sorvete de Baunilha",
+        "Leite",
+        "Ovomaltine",
+        "Chantilly",
+        "Calda de Chocolate"
+      ],
+      "tempo_preparo": 5,
+      "desbloqueado": false,
+      "categoria": "bebida"
+    }
+  ]
+}
