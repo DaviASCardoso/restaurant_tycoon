@@ -2,15 +2,19 @@ import shutil
 
 largura, altura = shutil.get_terminal_size()
 
-def tela_inicial() -> int:
+def tela_inicial(saldo: float) -> int:
     """
     Exibe a interface da tela inicial.
+    
+    Parâmetros:
+        saldo (float): O saldo atual a ser exibido.
     
     Retorna:
         int: A escolha do usuário.
     """
     
     while True:
+        print(f"Saldo: R$ {saldo:.2f}\n")
         print("1 - Gerenciar cardápio")
         print("2 - Gerenciar funcionários")
         print("3 - Abrir restaurante")

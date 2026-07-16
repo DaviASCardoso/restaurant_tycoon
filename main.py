@@ -1,5 +1,6 @@
 import menus
 import cardapio
+import monetario
 import shutil
 from pathlib import Path
 
@@ -22,7 +23,7 @@ opcoes_tela_inicial = {
 }
 
 while True:
-    escolha = menus.tela_inicial()
+    escolha = menus.tela_inicial(monetario.carregar_saldo())
     tela = opcoes_tela_inicial.get(escolha)
     if tela == "sair":
         print("\nAté mais!")
