@@ -23,24 +23,6 @@ class ItemCardapio():
             "desbloqueado": self.desbloqueado,
             "categoria": self.categoria
         }
-        
-    def salvar(self):
-        with open("database.json", "r", encoding="utf-8") as arquivo:
-            conteudo = json.load(arquivo)
-        
-        encontrado = False
-        
-        for i, item in enumerate(conteudo["itens"]):
-            if item["id"] == self.id:
-                conteudo["itens"][i] =  self.para_dicionario()
-                encontrado = True
-                break
-                
-        if not encontrado:
-            conteudo["itens"].append(self.para_dicionario())
-                
-        with open("database.json", "w", encoding="utf-8") as arquivo:
-            json.dump(conteudo, arquivo, indent=4, ensure_ascii=False)
             
 def carregar_cardapio() -> list:
     """
