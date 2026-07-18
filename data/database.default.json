@@ -276,5 +276,87 @@
       "desbloqueado": false,
       "categoria": "bebida"
     }
+  ],
+  "funcionarios": [
+    {
+      "id": 1,
+      "nome": "Joel Ferreira",
+      "sexo": "M",
+      "idade": 19,
+      "salario": 50.0,
+      "funcao": "Chapeiro Júnior",
+      "contratavel": true,
+      "contratado": true
+    },
+    {
+      "id": 2,
+      "nome": "Sérgio Nakamura",
+      "sexo": "M",
+      "idade": 27,
+      "salario": 140.0,
+      "funcao": "Montador Júnior",
+      "contratavel": false,
+      "contratado": false
+    },
+    {
+      "id": 3,
+      "nome": "Priscila Rangel",
+      "sexo": "F",
+      "idade": 24,
+      "salario": 210.0,
+      "funcao": "Garçom Júnior",
+      "contratavel": false,
+      "contratado": false
+    },
+    {
+      "id": 4,
+      "nome": "Wanderson Silva",
+      "sexo": "M",
+      "idade": 35,
+      "salario": 300.0,
+      "funcao": "Chapeiro Pleno",
+      "contratavel": false,
+      "contratado": false
+    },
+    {
+      "id": 5,
+      "nome": "Cléber Antunes",
+      "sexo": "M",
+      "idade": 31,
+      "salario": 430.0,
+      "funcao": "Montador Pleno",
+      "contratavel": false,
+      "contratado": false
+    },
+    {
+      "id": 6,
+      "nome": "Amanda Vilela",
+      "sexo": "F",
+      "idade": 30,
+      "salario": 620.0,
+      "funcao": "Garçom Pleno",
+      "contratavel": false,
+      "contratado": false
+    },
+    {
+      "id": 7,
+      "nome": "Douglas Peçanha",
+      "sexo": "M",
+      "idade": 33,
+      "salario": 900.0,
+      "funcao": "Operador de Drive Thru",
+      "contratavel": false,
+      "contratado": false
+    },
+    {
+      "id": 8,
+      "nome": "Otávio Menezes",
+      "sexo": "M",
+      "idade": 45,
+      "salario": 1300.0,
+      "funcao": "Gerenciador de estoque",
+      "contratavel": false,
+      "contratado": false
+    }
   ]
 }

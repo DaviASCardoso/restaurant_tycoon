@@ -81,3 +81,96 @@ def tela_editar_item() -> tuple[str, float]:
             print("Por favor, digite apenas números.\n")
             
     return novo_nome, novo_preco
+
+def tela_funcionarios(funcionarios: list) -> int:
+    """
+    Exibe a tela de gerenciamento de funcionários.
+    
+    Parâmetros:
+        funcionarios (list): Lista de funcionarios.
+        
+    Retorna:
+        int: A escolha do usuário.
+    """
+    while True:
+        funcionarios_contratados = [u for u in funcionarios if u.contratado]
+        for i in funcionarios_contratados:
+            print(str(i))
+            
+        print(f"{len(funcionarios_contratados) + 1}: Contratar mais funcionários")
+        print(f"{len(funcionarios_contratados) + 2}: Voltar")
+    
+        try:
+            escolha = int(input("\n>> "))
+            
+            if escolha >= 1 and escolha <= len(funcionarios_contratados) + 2:
+                return escolha
+            else:
+                print("Opção inválida, tente novamente.\n")
+                        
+        except ValueError:
+            print("Por favor, digite apenas números inteiros.\n")
+            
+def tela_contratar_funcionarios(funcionarios: list) -> int | None:
+    """
+    Exibe a tela de contratação de funcionários.
+    
+    Parâmetros:
+        funcionarios (list): Lista de funcionarios.
+        
+    Retorna:
+        int | None: Escolha do usuário, ou None quando não houverem
+        funcionários contratáveis.
+    """
+    
+    while True:
+        funcionarios_disponiveis = [f for f in funcionarios if f.contratavel and not f.contratado]
+        
+        if not funcionarios_disponiveis:
+            print("Não existem funcionários disponíveis para contratação.\n")
+            return None
+        
+        for i in funcionarios_disponiveis:
+            print(str(i))
+            
+        print(f"{len(funcionarios_disponiveis) + 1}: Voltar")
+            
+        try:
+            escolha = int(input("\n>> "))
+            
+            if escolha >= 1 and escolha <= len(funcionarios_disponiveis) + 1:
+                return escolha
+            else:
+                print("Opção inválida, tente novamente.\n")
+                        
+        except ValueError:
+            print("Por favor, digite apenas números inteiros.\n")
+            
+def tela_detalhes_funcionario(funcionarios: list, id: int) -> bool:
+    """
+    Exibe a tela de detalhes de um funcionário.
+    
+    Parâmetros:
+        funcionarios (list): Lista de funcionários.
+        id (int): ID do funcionáio a serem exibidos os detalhes.
+        
+    Retorna:
+        bool: True se o usuário quiser demitir o funcionário, False se
+        quiser manter o funcionario contratado.
+    """
+    
+    funcionario = next((obj for obj in funcionarios if obj.id == id), None)
+    
+    while True:
+        print(f"{funcionario.nome} - {funcionario.funcao}")
+        print(f"Salário: R$ {funcionario.salario:.2f}")
+        print(f"Idade: {funcionario.idade}")
+        
+        escolha = input("Deseja demitir esse funcionário (S/N): ")
+        
+        if escolha.upper() in ("S", "SIM"):
+            return True
+        elif escolha.upper() in ("N", "NAO, NÃO"):
+            return False
+        else:
+            print("Opção inválida, tente novamente.\n")
