@@ -46,22 +46,22 @@ while True:
             item.nome = novo_nome
             item.preco = novo_preco
     elif tela == "tela_funcionarios":
-        escolha = menus.tela_funcionarios(lista_funcionarios)
-        funcionario = next((obj for obj in lista_funcionarios if obj.id == escolha), None)
+        acao, alvo = menus.tela_funcionarios(lista_funcionarios)
         
-        if escolha == (len(lista_funcionarios_contratados) + 2):
+        if acao is menus.AcaoFuncionario.SELECIONAR:
+            acao, alvo = menus.tela_detalhes_funcionario(alvo)
+            
+            if acao is menus.AcaoFuncionario.DEMITIR:
+                alvo.contratado = False
+            elif acao is menus.AcaoFuncionario.VOLTAR:
+                continue
+        elif acao is menus.AcaoFuncionario.IR_PARA_CONTRATACAO:
+            acao, alvo = menus.tela_contratar_funcionarios(lista_funcionarios)
+            
+            if acao is menus.AcaoFuncionario.CONTRATAR:
+                alvo.contratado = True
+            elif acao is menus.AcaoFuncionario.VOLTAR:
+                continue
+        elif acao is menus.AcaoFuncionario.VOLTAR:
             continue
-        elif escolha == (len(lista_funcionarios_contratados) + 1):
-            escolha = menus.tela_contratar_funcionarios(lista_funcionarios)
-            if escolha is None:
-                continue
-            funcionario = next((obj for obj in lista_funcionarios if obj.id == escolha), None)
-            if funcionario is None:
-                continue
-            funcionario.contratado = True
-        else:
-            funcionario = next((obj for obj in lista_funcionarios if obj.id == escolha), None)
-            if funcionario is None:
-                continue
-            demitir = menus.tela_detalhes_funcionario(lista_funcionarios, escolha)
-            funcionario.contratado = not demitir
+            

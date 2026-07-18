@@ -12,7 +12,7 @@ class Funcionario():
         self.contratado = contratado
         
     def __str__(self):
-        return f"{self.id}: {self.nome} - {self.funcao} (R$ {self.salario:.2f})"
+        return f"{self.nome} - {self.funcao} (R$ {self.salario})"
     
     def para_dicionario(self) -> dict:
         return {

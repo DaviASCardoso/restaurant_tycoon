@@ -1,6 +1,15 @@
-import shutil
+from enum import Enum, auto
+from collections import namedtuple
+from funcionarios import Funcionario
 
-largura, altura = shutil.get_terminal_size()
+EntradaMenu = namedtuple("EntradaMenu", ["acao", "alvo", "rotulo"])
+
+class AcaoFuncionario(Enum):
+    SELECIONAR = auto()
+    CONTRATAR = auto()
+    DEMITIR = auto()
+    VOLTAR = auto()
+    IR_PARA_CONTRATACAO = auto()
 
 def tela_inicial(saldo: float) -> int:
     """
@@ -82,7 +91,7 @@ def tela_editar_item() -> tuple[str, float]:
             
     return novo_nome, novo_preco
 
-def tela_funcionarios(funcionarios: list) -> int:
+def tela_funcionarios(funcionarios: list) -> tuple[AcaoFuncionario, Funcionario | None]:
     """
     Exibe a tela de gerenciamento de funcionários.
     
@@ -90,28 +99,36 @@ def tela_funcionarios(funcionarios: list) -> int:
         funcionarios (list): Lista de funcionarios.
         
     Retorna:
-        int: A escolha do usuário.
+        tuple[AcaoFuncionario, Funcionario | None]: uma tupla contendo:
+            - AcaoFuncionario: Ação (Ex.: SELECIONAR, VOLTAR).
+            - Funcionario | None: Objeto Funcionario como alvo quando 
+            a ação pedir um, ou None quando a ação não pede alvo.
     """
     while True:
         funcionarios_contratados = [u for u in funcionarios if u.contratado]
-        for i in funcionarios_contratados:
-            print(str(i))
-            
-        print(f"{len(funcionarios_contratados) + 1}: Contratar mais funcionários")
-        print(f"{len(funcionarios_contratados) + 2}: Voltar")
-    
+        entradas = []
+        for f in funcionarios_contratados:
+            entradas.append(EntradaMenu(AcaoFuncionario.SELECIONAR, f, str(f)))
+                        
+        entradas.append(EntradaMenu(AcaoFuncionario.IR_PARA_CONTRATACAO, None, "Contratar mais funcionários"))
+        entradas.append(EntradaMenu(AcaoFuncionario.VOLTAR, None, "Voltar"))
+
+        for pos, entrada in enumerate(entradas, 1):
+            print(f"{pos}: {entrada.rotulo}")
+        
         try:
             escolha = int(input("\n>> "))
             
-            if escolha >= 1 and escolha <= len(funcionarios_contratados) + 2:
-                return escolha
+            if escolha >= 1 and escolha <= len(entradas):
+                entrada = entradas[escolha - 1]
+                return entrada.acao, entrada.alvo
             else:
                 print("Opção inválida, tente novamente.\n")
                         
         except ValueError:
             print("Por favor, digite apenas números inteiros.\n")
             
-def tela_contratar_funcionarios(funcionarios: list) -> int | None:
+def tela_contratar_funcionarios(funcionarios: list) -> tuple[AcaoFuncionario, Funcionario | None]:
     """
     Exibe a tela de contratação de funcionários.
     
@@ -119,8 +136,10 @@ def tela_contratar_funcionarios(funcionarios: list) -> int | None:
         funcionarios (list): Lista de funcionarios.
         
     Retorna:
-        int | None: Escolha do usuário, ou None quando não houverem
-        funcionários contratáveis.
+        tuple[AcaoFuncionario, Funcionario | None]: Uma tupla contendo:
+            - AcaoFuncionario: Ação (Ex.: CONTRATAR, VOLTAR).
+            - Funcionario | None: Objeto Funcionario como alvo quando 
+            a ação pedir um, ou None quando a ação não pede alvo.
     """
     
     while True:
@@ -128,38 +147,44 @@ def tela_contratar_funcionarios(funcionarios: list) -> int | None:
         
         if not funcionarios_disponiveis:
             print("Não existem funcionários disponíveis para contratação.\n")
-            return None
+            return AcaoFuncionario.VOLTAR, None
         
-        for i in funcionarios_disponiveis:
-            print(str(i))
-            
-        print(f"{len(funcionarios_disponiveis) + 1}: Voltar")
-            
+        entradas = []
+        for f in funcionarios_disponiveis:
+            entradas.append(EntradaMenu(AcaoFuncionario.CONTRATAR, f, str(f)))
+
+        entradas.append(EntradaMenu(AcaoFuncionario.VOLTAR, None, "Voltar"))
+
+        for pos, entrada in enumerate(entradas, 1):
+            print(f"{pos}: {entrada.rotulo}")
+
         try:
             escolha = int(input("\n>> "))
             
-            if escolha >= 1 and escolha <= len(funcionarios_disponiveis) + 1:
-                return escolha
+            if escolha >= 1 and escolha <= len(entradas):
+                entrada = entradas[escolha - 1]
+                return entrada.acao, entrada.alvo
             else:
                 print("Opção inválida, tente novamente.\n")
                         
         except ValueError:
             print("Por favor, digite apenas números inteiros.\n")
             
-def tela_detalhes_funcionario(funcionarios: list, id: int) -> bool:
+def tela_detalhes_funcionario(funcionario: Funcionario) -> tuple[AcaoFuncionario, Funcionario | None]:
     """
     Exibe a tela de detalhes de um funcionário.
     
     Parâmetros:
-        funcionarios (list): Lista de funcionários.
-        id (int): ID do funcionáio a serem exibidos os detalhes.
+        funcionario (Funcionario): Funcionario que se deseja exibir
+        os detalhes
         
     Retorna:
-        bool: True se o usuário quiser demitir o funcionário, False se
-        quiser manter o funcionario contratado.
+        tuple[AcaoFuncionario, Funcionario | None]: Uma tupla contendo:
+            - AcaoFuncionario: Ação. Neste caso, sempre DEMITIR ou
+            VOLTAR.
+            - Funcionario | None: Alvo da ação ou None a depender da 
+            ação.
     """
-    
-    funcionario = next((obj for obj in funcionarios if obj.id == id), None)
     
     while True:
         print(f"{funcionario.nome} - {funcionario.funcao}")
@@ -169,8 +194,8 @@ def tela_detalhes_funcionario(funcionarios: list, id: int) -> bool:
         escolha = input("Deseja demitir esse funcionário (S/N): ")
         
         if escolha.upper() in ("S", "SIM"):
-            return True
-        elif escolha.upper() in ("N", "NAO, NÃO"):
-            return False
+            return AcaoFuncionario.DEMITIR, funcionario
+        elif escolha.upper() in ("N", "NAO", "NÃO"):
+            return AcaoFuncionario.VOLTAR, None
         else:
             print("Opção inválida, tente novamente.\n")
