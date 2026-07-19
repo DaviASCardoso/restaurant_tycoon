@@ -46,7 +46,7 @@ def carregar_funcionarios() -> list:
         
     return lista_obj
 
-def salvar_funcionários(funcionarios: list) -> None:
+def salvar_funcionarios(funcionarios: list) -> None:
     """
     Salva a lista de funcionários no banco de dados.
     

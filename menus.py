@@ -1,6 +1,7 @@
 from enum import Enum, auto
 from collections import namedtuple
 from funcionarios import Funcionario
+from cardapio import ItemCardapio
 
 EntradaMenu = namedtuple("EntradaMenu", ["acao", "alvo", "rotulo"])
 
@@ -10,6 +11,10 @@ class AcaoFuncionario(Enum):
     DEMITIR = auto()
     VOLTAR = auto()
     IR_PARA_CONTRATACAO = auto()
+
+class AcaoCardapio(Enum):
+    SELECIONAR = auto()
+    VOLTAR = auto()
 
 def tela_inicial(saldo: float) -> int:
     """
@@ -41,7 +46,7 @@ def tela_inicial(saldo: float) -> int:
         except ValueError:
             print("Por favor, digite apenas números inteiros.\n")
             
-def tela_cardapio(itens: list) -> int:
+def tela_cardapio(itens: list[ItemCardapio]) -> tuple[AcaoCardapio, ItemCardapio | None]:
     """
     Exibe a interface do cardápio.
     
@@ -49,30 +54,43 @@ def tela_cardapio(itens: list) -> int:
         itens (list): Lista dos itens do cardápio.
     
     Retorna:
-        int: A escolha do usuário.
+        tuple[AcaoCardapio, ItemCardapio | None]: Uma tupla com:
+            - AcaoCardapio: Ação (ex.: SELECIONAR, VOLTAR)
+            - ItemCardapio | None: ItemCardapio como alvo da ação quando
+            a mesma pedir, None quando a ação não precisar de alvo.
     """
     
     while True:
         itens_desbloqueados = [u for u in itens if u.desbloqueado]
-        for i in itens_desbloqueados:
-            print(str(i))
-            
-        print(f"{len(itens_desbloqueados) + 1}: Voltar")
+        
+        entradas = []
+        
+        for f in itens_desbloqueados:
+            entradas.append(EntradaMenu(AcaoCardapio.SELECIONAR, f, str(f)))
+                        
+        entradas.append(EntradaMenu(AcaoCardapio.VOLTAR, None, "Voltar"))
+        
+        for pos, entrada in enumerate(entradas, 1):
+            print(f"{pos}: {entrada.rotulo}")
         
         try:
             escolha = int(input("\n>> "))
             
-            if escolha >= 1 and escolha <= len(itens_desbloqueados) + 1:
-                return escolha
+            if escolha >= 1 and escolha <= len(entradas):
+                entrada = entradas[escolha - 1]
+                return entrada.acao, entrada.alvo
             else:
                 print("Opção inválida, tente novamente.\n")
                         
         except ValueError:
             print("Por favor, digite apenas números inteiros.\n")
     
-def tela_editar_item() -> tuple[str, float]:
+def tela_detalhes_item(item: ItemCardapio) -> tuple[str, float]:
     """
-    Exibe a tela de edição de item.
+    Exibe a tela de detalhes de item.
+    
+    Parâmetros:
+        item(ItemCardapio): O item do cardapio ao qual será exibido os detalhes.
     
     Retorna:
         tuple[str, float]: uma tupla contendo:
@@ -80,7 +98,11 @@ def tela_editar_item() -> tuple[str, float]:
             - preco (float): O novo valor escolhido pelo usuário.
     """
     
-    novo_nome = str(input("Digite o novo nome do item: "))
+    print(f"Nome: {item.nome}\nPreço: {item.preco}\nTempo de preparo: {item.tempo_preparo}\nIngredientes:")
+    for f in item.ingredientes:
+        print(f)
+    
+    novo_nome = str(input("\nDigite o novo nome do item: "))
     
     while True:
         try:
@@ -91,7 +113,7 @@ def tela_editar_item() -> tuple[str, float]:
             
     return novo_nome, novo_preco
 
-def tela_funcionarios(funcionarios: list) -> tuple[AcaoFuncionario, Funcionario | None]:
+def tela_funcionarios(funcionarios: list[Funcionario]) -> tuple[AcaoFuncionario, Funcionario | None]:
     """
     Exibe a tela de gerenciamento de funcionários.
     
@@ -128,7 +150,7 @@ def tela_funcionarios(funcionarios: list) -> tuple[AcaoFuncionario, Funcionario 
         except ValueError:
             print("Por favor, digite apenas números inteiros.\n")
             
-def tela_contratar_funcionarios(funcionarios: list) -> tuple[AcaoFuncionario, Funcionario | None]:
+def tela_contratar_funcionarios(funcionarios: list[Funcionario]) -> tuple[AcaoFuncionario, Funcionario | None]:
     """
     Exibe a tela de contratação de funcionários.
     

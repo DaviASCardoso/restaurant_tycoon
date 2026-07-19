@@ -11,7 +11,7 @@ class ItemCardapio():
         self.categoria = categoria
         
     def __str__(self):
-        return f"{self.id}: {self.nome} - R$ {self.preco:.2f} (Preapro: {self.tempo_preparo}m)"
+        return f"{self.nome} - R$ {self.preco:.2f} (Preapro: {self.tempo_preparo}m)"
     
     def para_dicionario(self) -> dict:
         return {

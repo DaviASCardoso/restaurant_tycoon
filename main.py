@@ -33,18 +33,17 @@ while True:
     if tela == "sair":
         print("\nAté mais!")
         cardapio.salvar_cardapio(itens_cardapio)
-        funcionarios.salvar_funcionários(lista_funcionarios)
+        funcionarios.salvar_funcionarios(lista_funcionarios)
         break
     elif tela == "tela_cardapio":
-        escolha = menus.tela_cardapio(itens_cardapio)
-        item = next((obj for obj in itens_cardapio if obj.id == escolha), None)
+        acao, alvo = menus.tela_cardapio(itens_cardapio)
 
-        if escolha == (len(itens_desbloqueados) + 1):
+        if acao is menus.AcaoCardapio.VOLTAR:
             continue
-        else:
-            novo_nome, novo_preco = menus.tela_editar_item()
-            item.nome = novo_nome
-            item.preco = novo_preco
+        elif acao is menus.AcaoCardapio.SELECIONAR:
+            novo_nome, novo_preco = menus.tela_detalhes_item(alvo)
+            alvo.nome = novo_nome
+            alvo.preco = novo_preco
     elif tela == "tela_funcionarios":
         acao, alvo = menus.tela_funcionarios(lista_funcionarios)
         
