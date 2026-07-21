@@ -2,6 +2,7 @@ import menus
 import cardapio
 import monetario
 import funcionarios
+import dados
 import shutil
 from pathlib import Path
 
@@ -11,6 +12,10 @@ DEFAULT = BASE / "data" / "database.default.json"
 
 if not SAVE.exists():
     shutil.copy(DEFAULT, SAVE)
+
+if not dados.dados_existem():
+    username, restaurant_name = menus.tela_onbornding()
+    dados.atualizar_dados(username, restaurant_name)
 
 itens_cardapio = cardapio.carregar_cardapio()
 itens_desbloqueados = [u for u in itens_cardapio if u.desbloqueado]
@@ -63,4 +68,6 @@ while True:
                 continue
         elif acao is menus.AcaoFuncionario.VOLTAR:
             continue
-            
+    elif tela == "tela_dados":
+        username, restaurant_name = menus.tela_dados()
+        dados.atualizar_dados(username, restaurant_name)

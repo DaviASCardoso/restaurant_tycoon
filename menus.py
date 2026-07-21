@@ -2,6 +2,8 @@ from enum import Enum, auto
 from collections import namedtuple
 from funcionarios import Funcionario
 from cardapio import ItemCardapio
+import re
+
 
 EntradaMenu = namedtuple("EntradaMenu", ["acao", "alvo", "rotulo"])
 
@@ -15,6 +17,26 @@ class AcaoFuncionario(Enum):
 class AcaoCardapio(Enum):
     SELECIONAR = auto()
     VOLTAR = auto()
+
+def verificar_username(username: str) -> tuple[bool, str]:
+    """verifica se um username é válido.
+
+    Args:
+        username (str): username a ser verificado
+
+    Returns:
+        tuple[bool, str]: uma tupla com:
+            bool: False se for inválido, True se for válido
+            str: Mensagem de erro a ser exibida
+    """
+    if not (3 <= len(username) <= 18):
+        return False, "Erro: O username deve ter entre 3 e 18 caracteres."
+    
+
+    if not re.match("^[a-zA-Z0-9._]+$", username):
+        return False, "Erro: Use apenas letras, números, ponto (.) ou sublinhado (_)."
+    
+    return True, "Username válido!"
 
 def tela_inicial(saldo: float) -> int:
     """
@@ -221,3 +243,46 @@ def tela_detalhes_funcionario(funcionario: Funcionario) -> tuple[AcaoFuncionario
             return AcaoFuncionario.VOLTAR, None
         else:
             print("Opção inválida, tente novamente.\n")
+
+def tela_onbornding() -> tuple[str, str]:
+    """exibe a tela de onboarding
+
+    Returns:
+        tuple[str, str]: uma tupla com:
+            str: Username escolhido pelo usuário
+            str: Nome do retsurante escolhido pelo usuário
+    """
+
+    print("Bem vindo ao jogo Restaurant Tycoon!\nFeito por DaviASCardoso")
+    while True:
+        username = input("Escolha seu nome de usuário: ")
+        valido, msg = verificar_username(username)
+        if not valido:
+            print(msg)
+        else:
+            break
+
+    restaurant_name = input("Escolha o nome do seu restaurante: ")
+
+    return username, restaurant_name
+
+def tela_dados() -> tuple[str, str]:
+    """exibe a tela de alteração de dados
+
+    Returns:
+        tuple[str, str]: uma tupla com:
+            str: Username escolhido pelo usuário
+            str: Nome do retsurante escolhido pelo usuário
+    """
+
+    while True:
+        username = input("Escolha seu nome de usuário: ")
+        valido, msg = verificar_username(username)
+        if not valido:
+            print(msg)
+        else:
+            break
+
+    restaurant_name = input("Escolha o nome do seu restaurante: ")
+
+    return username, restaurant_name
